@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <title>Diagrammes Aléatoires Variables</title>
+  <Title>Diagrammes Aléatoires Variables</Title>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -178,7 +178,7 @@
     .date-time-container {
       font-size: 14px;
       color: lightgrey;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .date-time-container span {
@@ -312,16 +312,16 @@ function drawGrid(ctx, width, height) {
   for (let x = 0; x <= 16; x++) {
     let xPos = (x + 1) * xSpacing;
     ctx.beginPath();
-    ctx.moveTo(xPos, 0);
-    ctx.lineTo(xPos, height);
+    ctx.moveTo(xPos, ySpacing);
+    ctx.lineTo(xPos, height - ySpacing);
     ctx.stroke();
     
     // Draw black lines over the 1st, 5th, 9th, 13th, and 17th vertical lines (indices 0, 4, 8, 12, 16)
     if (x === 0 || x === 4 || x === 8 || x === 12 || x === 16) {
       ctx.strokeStyle = "grey"; // Change stroke color to black
       ctx.beginPath();
-      ctx.moveTo(xPos, 0);
-      ctx.lineTo(xPos, height);
+      ctx.moveTo(xPos, ySpacing);
+      ctx.lineTo(xPos, height - ySpacing);
       ctx.stroke();
       ctx.strokeStyle = "#ddd"; // Reset stroke color back to light grey
     }
@@ -331,16 +331,16 @@ function drawGrid(ctx, width, height) {
   for (let y = 0; y <= 8; y++) {
     let yPos = height - (y + 1) * ySpacing;
     ctx.beginPath();
-    ctx.moveTo(0, yPos);
-    ctx.lineTo(width, yPos);
+    ctx.moveTo(xSpacing, yPos);
+    ctx.lineTo(width - xSpacing, yPos);
     ctx.stroke();
     
     // Draw black lines over the 1st, 4th, and 9th horizontal lines (indices 0, 3, 8)
     if (y === 0 || y === 4 || y === 8) {
       ctx.strokeStyle = "grey"; // Change stroke color to black
       ctx.beginPath();
-      ctx.moveTo(0, yPos);
-      ctx.lineTo(width, yPos);
+      ctx.moveTo(xSpacing, yPos);
+      ctx.lineTo(width - xSpacing, yPos);
       ctx.stroke();
       ctx.strokeStyle = "#ddd"; // Reset stroke color back to light grey
     }
@@ -348,7 +348,7 @@ function drawGrid(ctx, width, height) {
 
   // Write numbers 0 to 16 in the last row (index 8 in the grid, which is the last horizontal line)
   const lastRowYPos = height - ySpacing / 2; // Adjust Y position for the numbers
-  ctx.fillStyle = "black"; // Set text color to black
+  ctx.fillStyle = "lightgrey"; // Set text color to black
   ctx.font = "bold 16px Arial";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
@@ -420,7 +420,7 @@ function drawGrid(ctx, width, height) {
         let zd = 1 + getRandomNumber(7);
         let za = 1+ getRandomNumber(7);
         while (zd === za) {
-          za = getRandomNumber(8);
+          za = 1 + getRandomNumber(7);
         }
 
         const extraFields = document.createElement("div");
