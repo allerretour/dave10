@@ -336,7 +336,7 @@ function drawGrid(ctx, width, height) {
     ctx.stroke();
     
     // Draw black lines over the 1st, 4th, and 9th horizontal lines (indices 0, 3, 8)
-    if (y === 0 || y === 3 || y === 8) {
+    if (y === 0 || y === 4 || y === 8) {
       ctx.strokeStyle = "grey"; // Change stroke color to black
       ctx.beginPath();
       ctx.moveTo(0, yPos);
