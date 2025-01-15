@@ -5,7 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <Title>Diagrammes Aléatoires Variables</Title>
+<!-- Reload button placed to the right of the screen -->
+<div class="reload-button" onclick="location.reload()">
+  <i class="fa fa-redo"></i> <!-- Reload Icon -->
+</div>
+
+  <div class="header">
+    <h1><span>D</span>iagramme <span>A</span>léatoires <span>V</span>ariables</h1>
+    <div class="button-container">
+      <button onclick="showGame(0)">1</button>
+      <button onclick="showGame(1)">2</button>
+      <button onclick="showGame(2)">3</button>
+      <button onclick="showGame(3)">4</button>
+      <button onclick="showGame(4)">5</button>
+      <button onclick="showGame(5)">6</button>
+      <button onclick="showGame(6)">7</button>
+      <button onclick="showGame(7)">8</button>
+      <button onclick="showGame(8)">9</button>
+      <button onclick="showGame(9)">10</button>
+    </div>
+  </div>
+
+
+
+ 
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -20,6 +43,26 @@
       overflow-x: hidden;
     }
 
+.reload-button {
+  font-size: 32px; /* Adjust font size */
+  padding: 15px;   /* Adjust padding */
+  background-color: #ecf0f1; /* Lighter color */
+  color: #2c3e50; /* Dark text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: fixed; /* Fixed position */
+  top: 10px; /* Align with the printer button */
+  right: 20px; /* Place it on the right */
+  z-index: 9999; /* Ensure it's on the topmost layer */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.reload-button i {
+  font-size: 32px; /* Increase icon size */
+}
+
+
     .header {
       width: 100%;
       position: sticky;
@@ -29,17 +72,20 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .header h1 {
       font-size: 36px;
       color: #333;
+      margin-bottom: 20px; /* Space between title and buttons */
     }
 
-    .header h1 span {
-      font-size: 40px;
-      color: #1D4E89;
-    }
+    
+
+
 
     .printer-button {
   font-size: 32px; /* Increase font size to better fit the icon */
@@ -62,8 +108,9 @@
     }
 
     .button-container {
-      margin-top: 20px;
+      margin-top: 10px; /* Space between title and buttons */
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
     }
@@ -178,7 +225,7 @@
     .date-time-container {
       font-size: 14px;
       color: lightgrey;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     .date-time-container span {
@@ -222,13 +269,13 @@
     }
 
     .ball {
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       display: inline-block;
       margin: 0 auto;
       text-align: center;
-      line-height: 30px;
+      line-height: 25px;
       color: white;
       font-weight: bold;
       font-size: 14px;
@@ -258,22 +305,7 @@
     <i class="fa fa-print"></i> <!-- Printer Icon -->
   </div>
 
-  <div class="header">
-    <h1><span>D</span>iagramme <span>A</span>léatoires <span>V</span>ariables</h1>
-  </div>
-
-  <div class="button-container">
-    <button onclick="showGame(0)">1</button>
-    <button onclick="showGame(1)">2</button>
-    <button onclick="showGame(2)">3</button>
-    <button onclick="showGame(3)">4</button>
-    <button onclick="showGame(4)">5</button>
-    <button onclick="showGame(5)">6</button>
-    <button onclick="showGame(6)">7</button>
-    <button onclick="showGame(7)">8</button>
-    <button onclick="showGame(8)">9</button>
-    <button onclick="showGame(9)">10</button>
-  </div>
+  
 
   <div class="game-container" id="gameContainer"></div>
 
@@ -346,24 +378,43 @@ function drawGrid(ctx, width, height) {
     }
   }
 
-  // Write numbers 0 to 16 in the last row (index 8 in the grid, which is the last horizontal line)
-  const lastRowYPos = height - ySpacing / 2; // Adjust Y position for the numbers
-  ctx.fillStyle = "lightgrey"; // Set text color to black
-  ctx.font = "bold 16px Arial";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
 
-  for (let i = 0; i <= 16; i++) {
-    let xPos = (i + 1) * xSpacing;
-    ctx.fillText(i, xPos, lastRowYPos); // Draw the number at each X position
+// Write numbers 0 to 16 in the last row (index 8 in the grid, which is the last horizontal line)
+const lastRowYPos = height - ySpacing / 2; // Adjust Y position for the numbers
+ctx.font = "bold 16px Arial";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+
+for (let i = 0; i <= 16; i++) {
+  let xPos = (i + 1) * xSpacing;
+
+  // Set color: black for even numbers except 0, 8, and 16
+  if (i !== 0 && i % 2 === 0 && i !== 8 && i !== 16) {
+    ctx.fillStyle = "black"; // Black color for even numbers except 0, 8, and 16
+  } else {
+    ctx.fillStyle = "lightgrey"; // Light grey for 0, 8, 16, and odd numbers
+  }
+  
+  ctx.fillText(i, xPos, lastRowYPos); // Draw the number at each X position
+}
+
+// Write numbers 0 to 8 in the first column (starting from the top)
+const firstColumnXPos = xSpacing / 2; // Position for the first column, at the left side of the canvas
+for (let i = 0; i <= 8; i++) {
+  let yPos = height - (i + 1) * ySpacing + ySpacing / 2 - 13; // Move the numbers slightly higher to align with the horizontal lines
+  
+  // Set color: black for even numbers except 0, 8, and 16
+  if (i !== 0 && i % 2 === 0 && i !== 8 && i !== 16) {
+    ctx.fillStyle = "black"; // Black color for even numbers except 0, 8, and 16
+  } else {
+    ctx.fillStyle = "lightgrey"; // Light grey for 0, 8, 16, and odd numbers
   }
 
-  // Write numbers 0 to 8 in the first column (starting from the top)
-  const firstColumnXPos = xSpacing / 2; // Position for the first column, at the left side of the canvas
-  for (let i = 0; i <= 8; i++) {
-    let yPos = height - (i + 1) * ySpacing + ySpacing / 2 - 13; // Move the numbers slightly higher to align with the horizontal lines
-    ctx.fillText(i, firstColumnXPos, yPos); // Draw the number in the first column
-  }
+  ctx.fillText(i, firstColumnXPos, yPos); // Draw the number in the first column
+}
+
+
+
 }
 
 
@@ -472,6 +523,7 @@ function drawGrid(ctx, width, height) {
         canvas.height = 250;
         canvas.style.display = "none";
         canvasContainer.appendChild(canvas);
+
 
         elementsContainer.appendChild(canvasContainer);
         drawTableAndCircles(canvas, pairs);
