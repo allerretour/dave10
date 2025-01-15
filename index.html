@@ -59,15 +59,15 @@
 
 
     .header h1 {
-      font-size: 36px;
+      font-size: 34px;
       color: #333;
       margin-bottom: 20px; /* Space between title and buttons */
     }
 
     
 .reload-button, .printer-button {
-  font-size: 32px; /* Adjust font size */
-  padding: 15px;   /* Adjust padding */
+  font-size: 24px; /* Adjust font size */
+  padding: 12px;   /* Adjust padding */
   background-color: #ecf0f1; /* Lighter color */
   color: #2c3e50; /* Dark text */
   border: none;
@@ -465,8 +465,8 @@ for (let i = 0; i <= 8; i++) {
         const extraFields = document.createElement("div");
         extraFields.className = "extra-fields";
         extraFields.innerHTML = `
-          <button class="btn-zd">ZD: ${zd}</button>
-          <button class="btn-za">ZA: ${za}</button>
+          <button class="btn-zd">ZD : ${zd}</button>
+          <button class="btn-za">ZA : ${za}</button>
         `;
 
         elementsContainer.appendChild(roundTitle);
@@ -477,7 +477,7 @@ for (let i = 0; i <= 8; i++) {
         const table = document.createElement("table");
         table.innerHTML = `
           <tr>
-            <th>Boules</th>
+            <th>Boule</th>
             <th>Position</th>
           </tr>
         `;
