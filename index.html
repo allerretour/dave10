@@ -546,14 +546,17 @@ for (let i = 0; i <= 8; i++) {
     }
 
     function exportGameCoordinates() {
-  let content = "Coordinates of all games:\n\n";
+  let content = "Diagrammes de 1 à 10\n\n";
+  
   
   // Add date to the filename
   const currentDate = new Date().toLocaleDateString().replace(/\//g, '-'); // Format the date
   const filename = `DAVE10_${currentDate}.txt`;
   
+content += `Généré : ${currentDateTime}\n\n`
+
   games.forEach((game, i) => {
-    content += `Game ${i + 1}:\n`;
+    content += `Diagramme ${i + 1}:\n`;
     // Include ZD and ZA
     const zdZaButtons = game.elementsContainer.querySelectorAll(".btn-zd, .btn-za");
     const zd = zdZaButtons[0].textContent.split(":")[1].trim();
@@ -561,8 +564,8 @@ for (let i = 0; i <= 8; i++) {
     
     content += `ZD: ${zd}, ZA: ${za}\n`;
     
-    game.pairs.forEach(pair => {
-      content += `H${pair[0]} / V${pair[1]}\n`;
+    game.pairs.forEach((pair, index) => {
+      content += `(${index +1}) : H${pair[0]} / V${pair[1]}\n`;
     });
     
     content += "\n";
